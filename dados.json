@@ -1,0 +1,43 @@
+{
+  "Sheet1": [
+    {
+      "Material": "10378",
+      "EAN": "7038",
+      "Produto": "TORTINHA LIMAO KG",
+      "Componente": "10857",
+      "Ingrediente": "MP PAD LEITE CONDENSADO KG",
+      "Quantidade": 0.354,
+      "Unid.med.componente": "KG",
+      "Quantidade básica": 1,
+      "Material Principal": "10378",
+      "Nº item": "0010",
+      "Imagem": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/padariareceituario.appspot.com\/o\/padeiro-removebg-preview.png?alt=media&token=e1a46ca2-d0b7-478a-a531-d257436b6a52"
+    },
+    {
+      "Material": "10378",
+      "EAN": "7038",
+      "Produto": "TORTINHA LIMAO KG",
+      "Componente": "14233",
+      "Ingrediente": "MP PAD BASE PARA TORTA 6CM KG",
+      "Quantidade": 0.361,
+      "Unid.med.componente": "KG",
+      "Quantidade básica": 1,
+      "Material Principal": "10378",
+      "Nº item": "0020",
+      "Imagem": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/padariareceituario.appspot.com\/o\/padeiro-removebg-preview.png?alt=media&token=e1a46ca2-d0b7-478a-a531-d257436b6a52"
+    },
+    {
+      "Material": "10378",
+      "EAN": "7038",
+      "Produto": "TORTINHA LIMAO KG",
+      "Componente": "17591",
+      "Ingrediente": "MP PAD CHANTILY NEUTRO KG",
+      "Quantidade": 0.072,
+      "Unid.med.componente": "KG",
+      "Quantidade básica": 1,
+      "Material Principal": "10378",
+      "Nº item": "0030",
+      "Imagem": "https:\/\/firebasestorage.googleapis.com\/v0\/b\/padariareceituario.appspot.com\/o\/padeiro-removebg-preview.png?alt=media&token=e1a46ca2-d0b7-478a-a531-d257436b6a52"
+    }
+  ]
+}
