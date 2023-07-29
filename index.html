@@ -103,56 +103,75 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Dados em formato JSON
-    var dados;
+    var dados = {
+      "Sheet1": [
+        // ... (seus dados JSON aqui) ...
+      ]
+    };
 
-    <script>
-  // Dados em formato JSON
-  var dados;
+    // Função para buscar os ingredientes e exibir a tabela
+    function buscarIngredientes() {
+      var ean = $("#eanInput").val();
+      var quantidade = parseFloat($("#quantidadeInput").val());
 
-  // Função para carregar os dados JSON externamente
-  fetch('dados.json')
-    .then(response => response.json())
-    .then(data => {
-      dados = data;
-    })
-    .catch(error => {
-      console.error('Erro ao carregar o JSON:', error);
-    });
+      // Filtrar os dados do JSON pelo EAN informado
+      var filteredData = dados.Sheet1.filter(function (item) {
+        return item.EAN === ean;
+      });
 
-  // Função para buscar os ingredientes e exibir a tabela
-  function buscarIngredientes() {
-    var ean = $("#eanInput").val();
-    var quantidade = parseFloat($("#quantidadeInput").val());
+      // Exibir o Texto breve material correspondente
+      if (filteredData.length > 0) {
+        var textoBreveMaterial = filteredData[0].Produto;
+        $("#textoBreveMaterial").text(textoBreveMaterial);
+      } else {
+        $("#textoBreveMaterial").text("");
+      }
 
-    // Filtrar os dados do JSON pelo EAN informado
-    var filteredData = dados.Sheet1.filter(function (item) {
-      return item.EAN === ean;
-    });
+      // Criar a tabela HTML
+      var table = "<table class='table'><thead><tr><th>Ingrediente</th><th>Quantidade</th><th>Unidade de Medida</th><th>Imagem</th></tr></thead><tbody>";
 
-    // Exibir o Texto breve material correspondente
-    if (filteredData.length > 0) {
-      var textoBreveMaterial = filteredData[0].Produto;
-      $("#textoBreveMaterial").text(textoBreveMaterial);
-    } else {
-      $("#textoBreveMaterial").text("");
+      // Calcular a quantidade de cada ingrediente multiplicando pela quantidade informada
+      filteredData.forEach(function (item) {
+        var quantidadeComponente = item.Quantidade * quantidade;
+        table += "<tr><td>" + item.Ingrediente + "</td><td>" + quantidadeComponente.toFixed(3) + "</td><td>" + item["Unid.med.componente"] + "</td><td><img src='" + item.Imagem + "' alt='Imagem do produto' style='max-height: 50px; cursor: pointer;' onclick='ampliarImagem(\"" + item.Imagem + "\")'></td></tr>";
+      });
+
+      table += "</tbody></table>";
+
+      // Exibir a tabela na div de resultado
+      $("#resultadoDiv").html(table);
     }
 
-    // Criar a tabela HTML
-    var table = "<table class='table'><thead><tr><th>Ingrediente</th><th>Quantidade</th><th>Unidade de Medida</th><th>Imagem</th></tr></thead><tbody>";
+    // Função para exibir o Texto breve material correspondente ao digitar o EAN
+    function exibirTextoBreveMaterial() {
+      var ean = $("#eanInput").val();
+      var filteredData = dados.Sheet1.filter(function (item) {
+        return item.EAN === ean;
+      });
+      if (filteredData.length > 0) {
+        var textoBreveMaterial = filteredData[0].Produto;
+        $("#textoBreveMaterial").text(textoBreveMaterial);
+      } else {
+        $("#textoBreveMaterial").text("");
+      }
+    }
 
-    // Calcular a quantidade de cada ingrediente multiplicando pela quantidade informada
-    filteredData.forEach(function (item) {
-      var quantidadeComponente = item.Quantidade * quantidade;
-      table += "<tr><td>" + item.Ingrediente + "</td><td>" + quantidadeComponente.toFixed(3) + "</td><td>" + item["Unid.med.componente"] + "</td><td><img src='" + item.Imagem + "' alt='Imagem do produto' style='max-height: 50px; cursor: pointer;' onclick='ampliarImagem(\"" + item.Imagem + "\")'></td></tr>";
-    });
+    // Função para ampliar a imagem
+    function ampliarImagem(url) {
+      var imagemAmpliada = document.getElementById("imagemAmpliada");
+      imagemAmpliada.src = url;
+      $(".imagem-ampliada").fadeIn();
+    }
 
-    table += "</tbody></table>";
+    // Função para fechar a imagem ampliada
+    function fecharAmpliada() {
+      $(".imagem-ampliada").fadeOut();
+    }
 
-    // Exibir a tabela na div de resultado
-    $("#resultadoDiv").html(table);
-  }
-
-  // Restante do código permanece o mesmo
-  // ...
-</script>
-
+    // Função para realizar o logout e redirecionar para a página "login.html"
+    function logout() {
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
