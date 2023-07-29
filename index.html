@@ -68,11 +68,11 @@
   <div class="container">
     <div class="row justify-content-end">
       <div class="col-auto">
-        <!-- Adicione o botão de logout no canto superior direito -->
+        <!-- Botão de logout no canto superior direito -->
         <button onclick="logout()" class="btn btn-danger mt-2">SAIR</button>
-        <!-- Crie o botão com o ícone dentro de um elemento "a" para criar o link -->
+        <!-- Botão "Menu" com o ícone de seta -->
         <a class="botao-menu" href="menu.html">
-          <i class="icone-menu fas fa-arrow-left"></i> <!-- Substitua a classe "fas fa-bars" pelo ícone que deseja -->
+          <i class="icone-menu fas fa-arrow-left"></i>
           Menu
         </a>
       </div>
@@ -102,12 +102,18 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Dados em formato JSON
-    var dados = {
-      "Sheet1": [
-        // ... (seus dados JSON aqui) ...
-      ]
-    };
+    // Variável para armazenar os dados JSON
+    var dados;
+
+    // Função para carregar os dados JSON externamente
+    fetch('dados.json')
+      .then(response => response.json())
+      .then(data => {
+        dados = data;
+      })
+      .catch(error => {
+        console.error('Erro ao carregar o JSON:', error);
+      });
 
     // Função para buscar os ingredientes e exibir a tabela
     function buscarIngredientes() {
