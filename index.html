@@ -105,27 +105,54 @@
     // Dados em formato JSON
     var dados;
 
-    // Função para carregar os dados JSON externamente
-    fetch('dados.json')
-      .then(response => response.json())
-      .then(data => {
-        dados = data;
-      })
-      .catch(error => {
-        console.error('Erro ao carregar o JSON:', error);
-      });
+    <script>
+  // Dados em formato JSON
+  var dados;
 
-    // Função para buscar os ingredientes e exibir a tabela
-    function buscarIngredientes() {
-      var ean = $("#eanInput").val();
-      var quantidade = parseFloat($("#quantidadeInput").val());
+  // Função para carregar os dados JSON externamente
+  fetch('dados.json')
+    .then(response => response.json())
+    .then(data => {
+      dados = data;
+    })
+    .catch(error => {
+      console.error('Erro ao carregar o JSON:', error);
+    });
 
-      // Restante do código para buscar e exibir os ingredientes permanece o mesmo
-      // ...
+  // Função para buscar os ingredientes e exibir a tabela
+  function buscarIngredientes() {
+    var ean = $("#eanInput").val();
+    var quantidade = parseFloat($("#quantidadeInput").val());
+
+    // Filtrar os dados do JSON pelo EAN informado
+    var filteredData = dados.Sheet1.filter(function (item) {
+      return item.EAN === ean;
+    });
+
+    // Exibir o Texto breve material correspondente
+    if (filteredData.length > 0) {
+      var textoBreveMaterial = filteredData[0].Produto;
+      $("#textoBreveMaterial").text(textoBreveMaterial);
+    } else {
+      $("#textoBreveMaterial").text("");
     }
 
-    // Restante do código permanece o mesmo
-    // ...
-  </script>
-</body>
-</html>
+    // Criar a tabela HTML
+    var table = "<table class='table'><thead><tr><th>Ingrediente</th><th>Quantidade</th><th>Unidade de Medida</th><th>Imagem</th></tr></thead><tbody>";
+
+    // Calcular a quantidade de cada ingrediente multiplicando pela quantidade informada
+    filteredData.forEach(function (item) {
+      var quantidadeComponente = item.Quantidade * quantidade;
+      table += "<tr><td>" + item.Ingrediente + "</td><td>" + quantidadeComponente.toFixed(3) + "</td><td>" + item["Unid.med.componente"] + "</td><td><img src='" + item.Imagem + "' alt='Imagem do produto' style='max-height: 50px; cursor: pointer;' onclick='ampliarImagem(\"" + item.Imagem + "\")'></td></tr>";
+    });
+
+    table += "</tbody></table>";
+
+    // Exibir a tabela na div de resultado
+    $("#resultadoDiv").html(table);
+  }
+
+  // Restante do código permanece o mesmo
+  // ...
+</script>
+
